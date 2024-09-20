@@ -1,18 +1,21 @@
-import { useEffect, useState } from 'react';
-import Button from '../components/Button';
-import Order from '../components/Order';
-import useCart from '../store/useCart'; 
-import PropTypes from 'prop-types';
-import useWaitressModal from '../hooks/useWaitressModal';
-import useMesaStore from '../hooks/useMesaStore';
-import axiosConfig from '../utils/axiosConfig'; 
+import { useEffect, useState } from "react";
+import Button from "../components/Button";
+import Order from "../components/Order";
+import useCart from "../store/useCart";
+import PropTypes from "prop-types";
+import useWaitressModal from "../hooks/useWaitressModal";
+import useMesaStore from "../hooks/useMesaStore";
+import axiosConfig from "../utils/axiosConfig";
+import toast from "react-hot-toast";
 
 const OrderSummary = () => {
-  const { orders, clearCart } = useCart(); 
+  const { orders, clearCart } = useCart();
   const table = useMesaStore();
   const waitressModal = useWaitressModal();
   const [subTotal, setSubTotal] = useState(
-    orders.length === 0 ? 0 : orders.reduce((acc, order) => acc + order.totalPrice, 0)
+    orders.length === 0
+      ? 0
+      : orders.reduce((acc, order) => acc + order.totalPrice, 0)
   );
   const [total, setTotal] = useState(subTotal + subTotal * 0.03);
 
@@ -32,9 +35,9 @@ const OrderSummary = () => {
 
   const transformOrder = (order) => {
     return {
-      id_menu: order.id, 
+      id_menu: order.id,
       id_mesa: table.numeroMesa,
-      agregados: order.addons.map((addon) => addon.id), 
+      agregados: order.addons.map((addon) => addon.id),
       cantidad: order.quantity,
     };
   };
@@ -43,11 +46,11 @@ const OrderSummary = () => {
     const transformedOrders = orders.map(transformOrder);
 
     try {
-      await axiosConfig.post('/pedidos', transformedOrders);
-      console.log('Pedido confirmado');
-      clearCart(); 
+      await axiosConfig.post("/pedidos", transformedOrders);
+      toast("Pedido confirmado");
+      clearCart();
     } catch (error) {
-      console.error('Error al confirmar el pedido', error);
+      console.error("Error al confirmar el pedido", error);
     }
   };
 
@@ -86,7 +89,6 @@ const OrderSummary = () => {
             ))}
           </div>
         )}
-
 
         <div name="bills" className="flex flex-col pl-3 pr-2 my-3">
           <div className="flex flex-row font-medium justify-between sm:text-xs md:text-sm lg:text-base xl:text-lg">

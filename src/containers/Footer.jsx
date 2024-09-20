@@ -27,7 +27,6 @@ const Footer = () => {
               width="25"
               height="28"
               fill="url(#pattern0_63_1019)"
-              name="Insta"
               className="cursor-pointer"
             />
             <rect
@@ -36,7 +35,6 @@ const Footer = () => {
               height="28"
               fill="url(#pattern1_63_1019)"
               className="cursor-pointer"
-              name="Facebook"
             />
             <rect
               x="62"
@@ -44,7 +42,6 @@ const Footer = () => {
               height="28"
               fill="url(#pattern2_63_1019)"
               className="cursor-pointer"
-              name="Twitter"
             />
             <rect
               x="93"
@@ -52,7 +49,6 @@ const Footer = () => {
               height="28"
               fill="url(#pattern3_63_1019)"
               className="cursor-pointer"
-              name="Mail"
             />
             <defs>
               <pattern
